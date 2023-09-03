@@ -22,14 +22,14 @@ epocas = 10000
 np.random.seed(0)
 
 
+# Passo 0
+pesos_entrada_oculta = np.random.uniform(size=(tamanho_entrada, tamanho_oculta))
+pesos_oculta_saida = np.random.uniform(size=(tamanho_oculta, tamanho_saida))
 
-
+# Passo 1
 entradas = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 saidas_esperadas = np.array([[0], [1], [1], [0]])
 
-
-pesos_entrada_oculta = np.random.uniform(size=(tamanho_entrada, tamanho_oculta))
-pesos_oculta_saida = np.random.uniform(size=(tamanho_oculta, tamanho_saida))
 
 # Treinamento da rede neural
 for epoca in range(epocas):
