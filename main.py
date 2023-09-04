@@ -8,7 +8,7 @@ def sigmoid(x):
 def sigmoid_derivada(x):
     return x * (1 - x)
 
-# Função degrau que irá transformar a saida em 0 ou 1
+# Função que irá transformar a saida em 0 ou 1
 def funcao_binaria(x):
     return 1 if x >= 0.5 else 0
 
@@ -17,7 +17,7 @@ def funcao_binaria(x):
 tamanho_entrada = 2
 tamanho_oculta = 2
 tamanho_saida = 1
-taxa_aprendizado = 0.3
+taxa_aprendizado = 0.35
 epocas = 10000
 np.random.seed(0)
 
