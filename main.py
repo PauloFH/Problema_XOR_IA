@@ -9,7 +9,7 @@ def sigmoid_derivada(x):
     return x * (1 - x)
 
 # Função degrau que irá transformar a saida em 0 ou 1
-def funcao_degrau(x):
+def funcao_binaria(x):
     return 1 if x >= 0.5 else 0
 
 
@@ -17,16 +17,16 @@ def funcao_degrau(x):
 tamanho_entrada = 2
 tamanho_oculta = 2
 tamanho_saida = 1
-taxa_aprendizado = 0.1
+taxa_aprendizado = 0.3
 epocas = 10000
 np.random.seed(0)
 
 
-# Passo 0
+# Inicializa os pesos com valores aleatórios
 pesos_entrada_oculta = np.random.uniform(size=(tamanho_entrada, tamanho_oculta))
 pesos_oculta_saida = np.random.uniform(size=(tamanho_oculta, tamanho_saida))
 
-# Passo 1
+# Aplica o valor das entradas e saídas esperadas
 entradas = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 saidas_esperadas = np.array([[0], [1], [1], [0]])
 
@@ -37,52 +37,68 @@ for epoca in range(epocas):
 
     for i in range(len(entradas)):
         
-        # Passo 2
+        # Calculam-se os nets dos neurônios da camada oculta
         entrada_oculta = np.dot(entradas[i], pesos_entrada_oculta)
         
-        # Passo 3
+        # Aplica a função de ativação sigmoide para obter a saida da camada oculta
         saida_oculta = sigmoid(entrada_oculta)
         
-        # Passo 4
+        # Calcula os os nets dos neurônios da camada de saída
         entrada_saida = np.dot(saida_oculta, pesos_oculta_saida)
         
-        # Passo 5
+        # Calcula as saidas dos neuronios da camada de saída
         saida_prevista = sigmoid(entrada_saida)
 
-        # Passo 6
+        #  Calcula o erro da camada de saída
         erro = saidas_esperadas[i] - saida_prevista
+        # INÍCIO DO BACKPROPAGATION
         d_saida = erro * sigmoid_derivada(saida_prevista)
         
-        # Passo 7
+        # Calcula-se os erros nos neurônios da camada oculta
         d_oculta = d_saida.dot(pesos_oculta_saida.T) * sigmoid_derivada(saida_oculta)
     
-        # Passo 8
+        # Atualição dos pesos da camada de saída
         pesos_oculta_saida += np.outer(saida_oculta, d_saida) * taxa_aprendizado
         
-        # Passo 9
+        # Atualiza os pesos da camada oculta
         pesos_entrada_oculta += np.outer(entradas[i], d_oculta) * taxa_aprendizado
         
-        # Passo 10
+        # Calcula o erro total da rede
         erro_total += np.sum(erro ** 2)
         
     if epoca % 1000 == 0:
         print(f"Época {epoca}, Erro Médio: {erro_total / len(entradas)}")
         
 
-temp = True
-array = [0, 0]
 
-while(temp):
-    t = int(input("Quer testar novamente? 1 - sim / 0 - não  :"))
-    if(t == 1):
-        for i in range(2):
-            array[i] = int(input("Digite o Número do Xor (0 ou 1):  "))
-        entrada_oculta = np.dot(array, pesos_entrada_oculta)
-        saida_oculta = sigmoid(entrada_oculta)
-        entrada_saida = np.dot(saida_oculta, pesos_oculta_saida)
-        saida_prevista = sigmoid(entrada_saida)
-        saida_binaria = funcao_degrau(saida_prevista[0])
-        print(f"Entrada: {array}, Saída prevista: {saida_binaria}")   
-        temp = True
-    else: 
-        temp = False
+# Teste da rede neural
+array = [0, 0]
+entrada_oculta = np.dot(array, pesos_entrada_oculta)
+saida_oculta = sigmoid(entrada_oculta)
+entrada_saida = np.dot(saida_oculta, pesos_oculta_saida)
+saida_prevista = sigmoid(entrada_saida)
+saida_binaria = funcao_binaria(saida_prevista[0])
+print(f"Entrada: {array}, Saída prevista: {saida_binaria}")   
+array = [1, 0]
+entrada_oculta = np.dot(array, pesos_entrada_oculta)
+saida_oculta = sigmoid(entrada_oculta)
+entrada_saida = np.dot(saida_oculta, pesos_oculta_saida)
+saida_prevista = sigmoid(entrada_saida)
+saida_binaria = funcao_binaria(saida_prevista[0])
+print(f"Entrada: {array}, Saída prevista: {saida_binaria}")   
+array = [0, 1]
+entrada_oculta = np.dot(array, pesos_entrada_oculta)
+saida_oculta = sigmoid(entrada_oculta)
+entrada_saida = np.dot(saida_oculta, pesos_oculta_saida)
+saida_prevista = sigmoid(entrada_saida)
+saida_binaria = funcao_binaria(saida_prevista[0])
+print(f"Entrada: {array}, Saída prevista: {saida_binaria}")   
+array = [1, 1]
+entrada_oculta = np.dot(array, pesos_entrada_oculta)
+saida_oculta = sigmoid(entrada_oculta)
+entrada_saida = np.dot(saida_oculta, pesos_oculta_saida)
+saida_prevista = sigmoid(entrada_saida)
+saida_binaria = funcao_binaria(saida_prevista[0])
+print(f"Entrada: {array}, Saída prevista: {saida_binaria}")   
+
+        
