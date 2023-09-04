@@ -6,3 +6,6 @@ Desenvolvimento de uma Rede neural que aprenda a identificar uma entrada binári
  se 1,1 -> 0
  se 1,0 -> 1
  se 0,1 -> 1
+
+# Modo de usar: 
+    Execulte o arquivo main.py

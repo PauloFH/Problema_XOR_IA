@@ -1,11 +1,10 @@
 import numpy as np
-
 import sigmoid as s
 
 
-# Configuração da rede neural
+# Configuração da rede neuralusado em coleções para combinar seus elementos em um único valor, aplicando uma função cumulativa que você especifica  
 tamanho_entrada = 2
-tamanho_oculta = 2
+tamanho_oculta = 4
 tamanho_saida = 1
 taxa_aprendizado = 0.35
 epocas = 10000
@@ -65,32 +64,33 @@ def funcao_binaria(x):
     return 1 if x >= 0.5 else 0
 
 # Teste da rede neural
+
 array = [0, 0]
 entrada_oculta = np.dot(array, pesos_entrada_oculta)
 saida_oculta = s.sigmoid(entrada_oculta)
 entrada_saida = np.dot(saida_oculta, pesos_oculta_saida)
 saida_prevista = s.sigmoid(entrada_saida)
 saida_binaria = funcao_binaria(saida_prevista[0])
-print(f"Entrada: {array}, Saída prevista: {saida_binaria}")   
+print(f"Entrada: {array}, Saída prevista: {saida_prevista}")   
 array = [1, 0]
 entrada_oculta = np.dot(array, pesos_entrada_oculta)
 saida_oculta = s.sigmoid(entrada_oculta)
 entrada_saida = np.dot(saida_oculta, pesos_oculta_saida)
 saida_prevista = s.sigmoid(entrada_saida)
 saida_binaria = funcao_binaria(saida_prevista[0])
-print(f"Entrada: {array}, Saída prevista: {saida_binaria}")   
+print(f"Entrada: {array}, Saída prevista: {saida_prevista}")   
 array = [0, 1]
 entrada_oculta = np.dot(array, pesos_entrada_oculta)
 saida_oculta = s.sigmoid(entrada_oculta)
 entrada_saida = np.dot(saida_oculta, pesos_oculta_saida)
 saida_prevista = s.sigmoid(entrada_saida)
 saida_binaria = funcao_binaria(saida_prevista[0])
-print(f"Entrada: {array}, Saída prevista: {saida_binaria}")   
+print(f"Entrada: {array}, Saída prevista: {saida_prevista}")   
 array = [1, 1]
 entrada_oculta = np.dot(array, pesos_entrada_oculta)
 saida_oculta = s.sigmoid(entrada_oculta)
 entrada_saida = np.dot(saida_oculta, pesos_oculta_saida)
 saida_prevista = s.sigmoid(entrada_saida)
 saida_binaria = funcao_binaria(saida_prevista[0])
-print(f"Entrada: {array}, Saída prevista: {saida_binaria}")   
+print(f"Entrada: {array}, Saída prevista: {saida_prevista}")   
 
